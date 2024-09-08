@@ -19,6 +19,21 @@ public class SimpleCustomEditorKrisTest : EditorWindow
 
     public void CreateGUI()
     {
+        var visualElement = new VisualElement();
+visualElement.style.width = 100;
+visualElement.style.height = 100;
+visualElement.style.backgroundColor = new Color(1, 0, 0, 1); // Red color
+visualElement.style.borderTopColor = Color.black;
+visualElement.style.borderTopWidth = 2;
+visualElement.style.borderLeftColor = Color.black;
+visualElement.style.borderLeftWidth = 2;
+visualElement.style.borderRightColor = Color.black;
+visualElement.style.borderRightWidth = 2;
+visualElement.style.borderBottomColor = Color.black;
+visualElement.style.borderBottomWidth = 2;
+rootVisualElement.Add(visualElement);
+
+
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
 

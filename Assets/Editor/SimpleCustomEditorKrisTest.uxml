@@ -1,5 +1,9 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/TestUSS.uss?fileID=7433441132597879392&amp;guid=0845f76b167b84f42801392a1a9fc33b&amp;type=3#TestUSS" />
     <engine:Label text="These controls were created in UI builder&#10;" />
     <engine:Button text="This is button1" name="Button1" />
     <engine:Toggle label="Number?" name="Toggle1" />
+    <engine:VisualElement name="VisualElement" class="TestUSS" style="flex-grow: 1; background-color: rgba(178, 70, 70, 0); background-image: none; -unity-background-image-tint-color: rgb(123, 0, 0); border-left-color: rgba(221, 20, 20, 0); border-right-color: rgba(221, 20, 20, 0); border-top-color: rgba(221, 20, 20, 0); border-bottom-color: rgba(221, 20, 20, 0); border-top-width: 33px; border-right-width: 33px; border-bottom-width: 33px; border-left-width: 33px; border-top-left-radius: 22px; border-top-right-radius: 22px; border-bottom-right-radius: 22px; border-bottom-left-radius: 22px; flex-direction: column-reverse; align-items: auto; justify-content: space-evenly; align-self: stretch; height: 403px; width: 454px;" />
+    <engine:Label text="Label" />
+    <engine:Button text="Button" />
 </engine:UXML>
