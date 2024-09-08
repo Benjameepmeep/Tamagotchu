@@ -1,22 +1,20 @@
-using Codice.Client.Common.GameUI;
-using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BenjaminCustomEditor : EditorWindow
 {
-    [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
-
-    [MenuItem("Window/UI Toolkit/BenjaminCustomEditor")]
+    [MenuItem("Window/UI Toolkit/BenjaminEditor")]
     public static void ShowExample()
     {
         BenjaminCustomEditor wnd = GetWindow<BenjaminCustomEditor>();
-        wnd.titleContent = new GUIContent("BenjaminCustomEditor");
+        wnd.titleContent = new GUIContent("BenjaminEditor");
     }
 
-    private int clickCount = 0;
+    [SerializeField]
+    private VisualTreeAsset _uXMLTree = default;
+
+    private int _clickCount = 0;
 
     private const string buttonPrefix = "button";
 
@@ -39,18 +37,16 @@ public class BenjaminCustomEditor : EditorWindow
         toggle.label = "Number?";
         root.Add(toggle);
 
-        // Instantiate UXML
-        VisualElement labelFromUXML = m_VisualTreeAsset.Instantiate();
-        root.Add(labelFromUXML);
+        // Instantiate UXML created automatically which is set at the default VisualTreeAsset.
+        root.Add(_uXMLTree.Instantiate());
 
         // Import UXML created manually.
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BenjaminCustomEditor_uxml.uxml");
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BenjaminCustomEditor_UXML.uxml");
         VisualElement labelFromUXML_uxml = visualTree.Instantiate();
         root.Add(labelFromUXML_uxml);
 
         //Call the event handler
         SetupButtonHandler();
-
     }
 
     //Functions as the event handlers for your button click and number counts
@@ -71,7 +67,7 @@ public class BenjaminCustomEditor : EditorWindow
     {
         VisualElement root = rootVisualElement;
 
-        ++clickCount;
+        ++_clickCount;
 
         //Because of the names we gave the buttons and toggles, we can use the
         //button name to find the toggle name.
@@ -80,6 +76,6 @@ public class BenjaminCustomEditor : EditorWindow
         string toggleName = "toggle" + buttonNumber;
         Toggle toggle = root.Q<Toggle>(toggleName);
 
-        Debug.Log("Button was clicked!" + (toggle.value ? " Count: " + clickCount : ""));
+        Debug.Log("Button was clicked!" + (toggle.value ? " Count: " + _clickCount : ""));
     }
 }
