@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SimpleCustomEditor : EditorWindow
+public class BenjaminCustomEditor : EditorWindow
 {
     [SerializeField]
     private VisualTreeAsset m_VisualTreeAsset = default;
@@ -12,12 +12,9 @@ public class SimpleCustomEditor : EditorWindow
     [MenuItem("Window/UI Toolkit/BenjaminCustomEditor")]
     public static void ShowExample()
     {
-        SimpleCustomEditor wnd = GetWindow<SimpleCustomEditor>();
+        BenjaminCustomEditor wnd = GetWindow<BenjaminCustomEditor>();
         wnd.titleContent = new GUIContent("BenjaminCustomEditor");
     }
-
-    [SerializeField]
-    private VisualTreeAsset uXMLTree = default;
 
     private int clickCount = 0;
 
@@ -47,7 +44,7 @@ public class SimpleCustomEditor : EditorWindow
         root.Add(labelFromUXML);
 
         // Import UXML created manually.
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/SimpleCustomEditor_uxml.uxml");
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BenjaminCustomEditor_uxml.uxml");
         VisualElement labelFromUXML_uxml = visualTree.Instantiate();
         root.Add(labelFromUXML_uxml);
 
