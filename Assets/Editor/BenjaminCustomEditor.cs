@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class BenjaminCustomEditor : EditorWindow
 {
+
+
     [MenuItem("Window/UI Toolkit/BenjaminEditor")]
     public static void ShowExample()
     {
