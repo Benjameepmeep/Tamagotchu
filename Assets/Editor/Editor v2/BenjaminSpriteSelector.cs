@@ -5,11 +5,15 @@ using UnityEngine.UIElements;
 
 public class BenjaminSpriteSelector : EditorWindow
 {
+    [SerializeField] private int selectedIndex = -1;
+   
     [MenuItem("Window/UI Toolkit/BenjaminSpriteSelector")]
     public static void ShowExample()
     {
         BenjaminSpriteSelector wnd = GetWindow<BenjaminSpriteSelector>();
         wnd.titleContent = new GUIContent("BenjaminSpriteSelector");
+        wnd.minSize = new Vector2(450, 200);
+        wnd.maxSize = new Vector2(1920, 720);
     }
 
     private VisualElement _rightPane;
@@ -33,7 +37,7 @@ public class BenjaminSpriteSelector : EditorWindow
         // A TwoPaneSplitView needs exactly two child elements.
         var leftPane = new ListView();
         splitView.Add(leftPane);
-        _rightPane = new VisualElement();
+        _rightPane = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
         splitView.Add(_rightPane);
 
         // Initialize the list view with all sprites' names
@@ -43,6 +47,35 @@ public class BenjaminSpriteSelector : EditorWindow
 
         // React to the user's selection
         leftPane.selectionChanged += OnSpriteSelectionChange;
+
+        // Restore the selection index from before the hot reload.
+        leftPane.selectedIndex = selectedIndex;
+
+        // Store the selection index when the selection changes.
+        leftPane.selectionChanged += (_) => selectedIndex = leftPane.selectedIndex;
+
+        // .selectionChanged is an event that expects a delegate / callback function with a signature. 
+        // Specifially a signature with a parameter signifying a group of items selected, which we don't use specifically. 
+        // We only use .selectedIndex from the item/object inside this group.
+        // Therefore we can omit the parameter inside the () with (_), to show we do not use this parameter.
+
+        // Alternative way to write the above line:
+            // leftPane.selectionChanged += (items) => { selectedIndex = leftPane.selectedIndex; };
+
+        // If we wanted to use the "(items)" parameter in this list, we could write a function like the below to log each item selected.
+
+            // leftPane.selectionChanged += (items) => {
+            // foreach (var item in items)
+            // {
+            //    Debug.Log("Selected item: " + item);
+            // }
+            // selectedIndex = leftPane.selectedIndex;
+            // };
+    }
+
+    private void LeftPane_selectionChanged(IEnumerable<object> obj)
+    {
+        throw new System.NotImplementedException();
     }
 
     private void OnSpriteSelectionChange(IEnumerable<object> selectedItems)
